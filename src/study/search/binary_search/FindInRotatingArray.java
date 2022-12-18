@@ -1,6 +1,6 @@
 package study.search.binary_search;
 
-public class FindInMountain2 {
+public class FindInRotatingArray {
     public static void main(String[] args) {
         System.out.println(search(new int[]{1,3,5}, 2));
     }
