@@ -4,48 +4,52 @@ import study.search.array.RotateArray;
 
 import java.util.Arrays;
 
-public class FindNoOfRotatingArray {
+public class FindMinInRotatingArray {
     public static void main(String[] args) {
 
-        int[] arrs = new int[]{0, 0, 0, 1, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 6, 6, 8, 9, 10, 10, 11, 11, 11, 11, 11, 12};
-        for (int i = 0; i < 10; i++) {
+        int[] arrs = new int[]{3,3,3,1};
+        for (int i = 0; i < 1; i++) {
             RotateArray.rotateArray(arrs, i);
             System.out.println(Arrays.toString(arrs));
-            System.out.println("Total no. of rotation " + findNoOfRotation(arrs));
+            System.out.println("Element found at " + searchMin(arrs));
         }
+//        int[] arrs = new int[]{2,2,2,0,1};
+
+
     }
 
-    static int findNoOfRotation(int[] nums) {
-        int peak = findPeak(nums);
-        System.out.println("Peak " + nums[peak]);
-        if(peak == nums.length-1){
-            return 0;
-        }
-        return peak + 1;
+    static int searchMin(int[] nums) {
+        int peak = findMin(nums);
+        System.out.println("min " + nums[peak]);
+        return nums[peak];
+
     }
 
-    private static int findPeak(int[] nums) {
+    private static int findMin(int[] nums) {
         int start = 0;
         int end = nums.length - 1;
         while (start < end) {
             int mid = (start + end) / 2;
-            if (nums[mid] > nums[mid + 1]) {
+            if (mid - 1 >= start && nums[mid] < nums[mid - 1]) {
                 return mid;
             }
+            if (nums[mid] > nums[mid + 1]) {
+                return mid + 1;
+            }
             if (nums[start] == nums[end] && nums[end] == nums[mid]) {
-                if (nums[start] > nums[start + 1]) {
+                if (nums[start] < nums[start + 1]) {
                     return start;
                 }
                 if (nums[end] < nums[end - 1]) {
-                    return end - 1;
+                    return end ;
                 }
                 start++;
                 end--;
             }
-            else if (nums[start] > nums[mid]) {
+            else if (nums[start] < nums[mid] || nums[mid] < nums[end] || nums[end]==nums[mid]) {
                 end = mid - 1;
             }
-            else if (nums[mid] > nums[start] || nums[mid] < nums[end] || nums[start] == nums[mid]) {
+            else if (nums[mid] < nums[start] ) {
                 start = mid + 1;
             }
         }

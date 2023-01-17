@@ -6,11 +6,12 @@ public class FindInNonRotatingArray {
     }
 
     private static int[] getNums() {
-        return new int[]{1,3};
+        return new int[]{2,2,2,5,5,5,7,8,8,10};
     }
 
     static int search(int[] nums, int target) {
         int peak = findPeak(nums);
+        System.out.println(nums[peak]);
         if (target == nums[peak]) {
             return peak;
         }
@@ -21,7 +22,7 @@ public class FindInNonRotatingArray {
         }
     }
 
-    static int findPeak(int[] nums) {
+    private static int findPeak(int[] nums) {
         int start = 0;
         int end = nums.length - 1;
         while (start < end) {
